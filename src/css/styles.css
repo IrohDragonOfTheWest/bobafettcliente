@@ -1,0 +1,14 @@
+
+.logo-container {
+    display: flex;
+    justify-content: center;
+    height: auto; /* Set the height to 100% of the viewport height or adjust as needed */
+  }
+
+.logo {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 8px 12px rgba(255, 255, 255, 0.1);
+  }
