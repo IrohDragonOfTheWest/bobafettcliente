@@ -7,6 +7,9 @@ import Inventario from './components/paginas/Inventario';
 import Usuarios from './components/paginas/Usuarios';
 import Sidebar from './components/ui/Sidebar';
 
+import firebase,{FirebaseContext} from './firebase';
+
+
 function App() {
 
   const appStyle = {
@@ -14,6 +17,10 @@ function App() {
   };
 
   return (
+    <FirebaseContext.Provider
+    value={{
+      firebase
+    }}> 
     <div style={appStyle}>
       <div className="md: flex min-h-screen">
         <Sidebar />
@@ -24,10 +31,14 @@ function App() {
             <Route path="/nueva-bebida" element={<NuevaBebida />} />
             <Route path="/inventario" element={<Inventario />} />
             <Route path="/usuarios" element={<Usuarios />} />
+          
+
+
           </Routes>
         </div>
       </div>
     </div>
+    </FirebaseContext.Provider>
 
   )
 }
