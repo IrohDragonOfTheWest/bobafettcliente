@@ -41,6 +41,15 @@ const Sidebar = () => {
                         Usuarios
                     </NavLink>
 
+                    <NavLink className="p-1 text-gray-400 block hover:bg-yellow-500 hover:text-gray-900" activeClassName="text-yellow-500" exact="true" to="/login">
+                        Login
+                    </NavLink>
+                    
+                    <NavLink className="p-1 text-gray-400 block hover:bg-yellow-500 hover:text-gray-900" activeClassName="text-yellow-500" exact="true" to="/registro-cliente">
+                        Registro
+                    </NavLink>
+
+
                 </nav>
             </div>
         </div>
