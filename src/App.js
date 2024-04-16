@@ -16,7 +16,13 @@ import AdminView from './components/paginas/AdminView';
 
 function App() {
 
-const [user, setUser] = useState(null);
+  const [isSideBarOpen, setIsSideBarOpen] = useState(false);
+
+  const toggleSidebar = () => {
+    setIsSideBarOpen(!isSideBarOpen);
+  };
+
+//const [user, setUser] = useState(null);
 
   const appStyle = {
     backgroundColor: '#DFE0DF'
@@ -27,10 +33,11 @@ const [user, setUser] = useState(null);
     value={{
       firebase
     }}> 
-    {user ? <AdminView/> : <Home/>}
+    {/* {user ? <AdminView/> : <Home/>} */}
     <div style={appStyle}>
+    <button onClick={toggleSidebar}>btnside</button>
       <div className="md: flex min-h-screen">
-        <Sidebar />
+        <Sidebar isOpen={isSideBarOpen}/>
         <div className="md: w-3/5 xl:w-4/5 p-6">
           <Routes>
             <Route path="/" element={<Home />} />
