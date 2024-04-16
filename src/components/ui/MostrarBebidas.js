@@ -1,14 +1,38 @@
+
+
 import React, {useContext, useRef}from 'react';
 import { FirebaseContext } from '../../firebase';
-
+import Venta from './Sidebar'
+import { Store } from '../utils/Store';
 const MostrarBebida = ({mostrarbebida}) => {
   //Existencia re para acceder al valor directamente
+const {state, dispatch}= useContext(Store)
+const {cart:{cartItems}} = state
 
+
+const addToCart = (id) => {
+  const existItemIndex = state.cart.cartItems.findIndex(x => x.id === id);
+
+  if (existItemIndex !== -1) {
+    // Si el producto ya está en el carrito, incrementa su cantidad en 1
+    dispatch({ type: 'INCREMENT_QUANTITY', payload: { id } });
+  } else {
+    // Si el producto no está en el carrito, agrégalo con cantidad 1
+    dispatch({ type: 'ADD_TO_CART', payload: { ...mostrarbebida, id, quantity: 1 } });
+  }
+}
+
+
+
+const delToCart = (id) => {
+dispatch({type: 'CART_REMOVE_ITEM', payload: id })
+}
   
   
   const existenciaRef = useRef(mostrarbebida.existencia);
 
-  const {firebase }=useContext(FirebaseContext);
+  const {firebase } = useContext(FirebaseContext);
+  const {cantidad} = Venta;
 
   const {id, nombre,imagen , precio, ingredientes,preparacion,existencia } = mostrarbebida;
 
@@ -61,14 +85,36 @@ return(
          </p>
          <p className='text-gray.600 mb-4'>Preparacion {''}
          <span className='text-gray-700 font-bold'>: {preparacion}</span>
-         
          </p>
+         
+         <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={() => addToCart(mostrarbebida.id)}>Agregar</button>
         </div>
      </div>
     </div>
+    <div className='card card-body mt-5'>
+      <h3 className='text-center'> Orden Compra</h3>
+        {
+          cartItems.map((item)=>(
+            <div key={item.id}>
+              <p><button className="bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={()=>delToCart(item)}>
+                x </button>
+              <strong>{item.nombre}</strong></p>
+              <p> Cantidad:{item.quantity}</p>
+            </div>
+          ))
+        }
+         < div>
+         Subtotal: ({cartItems.reduce((a, c)=> a + c.quantity, 0)}) : $
+         {cartItems.reduce((a,c)=>a + c.quantity * c.precio, 0)}
+         </div>
+         {cartItems.length ? <button  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"> Guardar venta </button > :  <button className="bg-green-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"> Guardar Venta</button>}
+    </div>
+
+
+
+
   </div>
         
-     
 
 
 );}

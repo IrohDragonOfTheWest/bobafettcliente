@@ -5,12 +5,17 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 // import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { StoreProvieder } from './components/utils/Store';
 
 
 ReactDOM.render(
+  
   <Router>
+    <StoreProvieder>
     <App />
-  </Router>, document.getElementById('root')
+    </StoreProvieder>
+  </Router>
+  , document.getElementById('root')
 );
 
 // const root = ReactDOM.createRoot(document.getElementById('root'));
