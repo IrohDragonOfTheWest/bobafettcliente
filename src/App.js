@@ -9,23 +9,23 @@ import Home from './components/paginas/Home';
 import Login from './components/paginas/Login';
 
 import firebase,{FirebaseContext} from './firebase';
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
+//import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
-const auth = getAuth(firebase);
+//const auth = getAuth(firebase);
 
 function App() {
 
   const [isSideBarOpen, setIsSideBarOpen] = useState(false);
 
-  const [user, setUser] = useState(null);
+  //const [user, setUser] = useState(null);
   
-  onAuthStateChanged(auth, (usuarioFirebase) => {
-    if (usuarioFirebase){
-      setUser(usuarioFirebase);
-    } else {
-      setUser(null);
-    }
-  });
+  // onAuthStateChanged(auth, (usuarioFirebase) => {
+  //   if (usuarioFirebase){
+  //     setUser(usuarioFirebase);
+  //   } else {
+  //     setUser(null);
+  //   }
+  // });
 
   const toggleSidebar = () => {
     setIsSideBarOpen(!isSideBarOpen);
@@ -52,8 +52,8 @@ function App() {
             <Route path="/menu" element={<Menu />} />
             <Route path="/nueva-bebida" element={<NuevaBebida />} />
             <Route path="/inventario" element={<Inventario />} />
-            {/* <Route path="/login" element={<Login/>}/> */}
-            {!user && <Route path="/login" element={<Login/>}/>}
+            <Route path="/login" element={<Login/>}/>
+            {/* {!user && <Route path="/login" element={<Login/>}/>} */}
           </Routes>
         </div>
       </div>

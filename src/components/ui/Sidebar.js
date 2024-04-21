@@ -28,23 +28,23 @@ const Sidebar = ({ isOpen }) => {
                     </p>
                     <nav>
 
-                        <NavLink className="p-1 text-gray-400 block hover:bg-yellow-500 hover:text-gray-900" activeClassName="text-yellow-500" exact="true" to="/homepage">
+                        <NavLink className="p-1 text-gray-400 block hover:bg-yellow-500 hover:text-gray-900" activeclassname="text-yellow-500" exact="true" to="/homepage">
                             Inicio
                         </NavLink>
 
-                        <NavLink className="p-1 text-gray-400 block hover:bg-yellow-500 hover:text-gray-900" activeClassName="text-yellow-500" exact="true" to="/ordenes">
+                        <NavLink className="p-1 text-gray-400 block hover:bg-yellow-500 hover:text-gray-900" activeclassname="text-yellow-500" exact="true" to="/ordenes">
                             Ordenes
                         </NavLink>
 
-                        <NavLink className="p-1 text-gray-400 block hover:bg-yellow-500 hover:text-gray-900" activeClassName="text-yellow-500" exact="true" to="/menu">
+                        <NavLink className="p-1 text-gray-400 block hover:bg-yellow-500 hover:text-gray-900" activeclassname="text-yellow-500" exact="true" to="/menu">
                             Menu
                         </NavLink>
 
-                        <NavLink className="p-1 text-gray-400 block hover:bg-yellow-500 hover:text-gray-900" activeClassName="text-yellow-500" exact="true" to="/inventario">
+                        <NavLink className="p-1 text-gray-400 block hover:bg-yellow-500 hover:text-gray-900" activeclassname="text-yellow-500" exact="true" to="/inventario">
                             Inventario
                         </NavLink>
 
-                        <NavLink className="p-1 text-gray-400 block hover:bg-yellow-500 hover:text-gray-900" activeClassName="text-yellow-500" exact="true" to="/login">
+                        <NavLink className="p-1 text-gray-400 block hover:bg-yellow-500 hover:text-gray-900" activeclassname="text-yellow-500" exact="true" to="/login">
                             Login
                         </NavLink>
                     </nav>
