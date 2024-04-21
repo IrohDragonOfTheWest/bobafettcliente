@@ -4,13 +4,11 @@ import Menu from './components/paginas/Menu';
 import NuevaBebida from './components/paginas/NuevaBebida';
 import Ordenes from './components/paginas/Ordenes';
 import Inventario from './components/paginas/Inventario';
-import Usuarios from './components/paginas/Usuarios';
 import Sidebar from './components/ui/Sidebar';
 import Home from './components/paginas/Home';
 
 import firebase,{FirebaseContext} from './firebase';
-import SignUp from './components/auth/SignUp';
-import SignIn from './components/auth/SignIn';
+
 import AdminView from './components/paginas/AdminView';
 
 
@@ -45,9 +43,7 @@ function App() {
             <Route path="/menu" element={<Menu />} />
             <Route path="/nueva-bebida" element={<NuevaBebida />} />
             <Route path="/inventario" element={<Inventario />} />
-            <Route path="/usuarios" element={<Usuarios />} />
-            <Route path="/crear" element={<SignUp />} />
-            <Route path="/ingresar" element={<SignIn />} />
+            
           </Routes>
         </div>
       </div>
