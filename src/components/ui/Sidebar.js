@@ -2,7 +2,6 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import '../../css/styles.css';
 import logo from '../imagenes/logo.jpeg'
-import AuthDetails from "../auth/AuthDetails";
 
 const Sidebar = ({ isOpen }) => {
 
@@ -45,21 +44,9 @@ const Sidebar = ({ isOpen }) => {
                             Inventario
                         </NavLink>
 
-                        <NavLink className="p-1 text-gray-400 block hover:bg-yellow-500 hover:text-gray-900" activeClassName="text-yellow-500" exact="true" to="/usuarios">
-                            Usuarios
+                        <NavLink className="p-1 text-gray-400 block hover:bg-yellow-500 hover:text-gray-900" activeClassName="text-yellow-500" exact="true" to="/login">
+                            Login
                         </NavLink>
-
-                        <NavLink className="p-1 text-gray-400 block hover:bg-yellow-500 hover:text-gray-900" activeClassName="text-yellow-500" exact="true" to="/crear">
-                            Crea tu cuenta
-                        </NavLink>
-
-                        <NavLink className="p-1 text-gray-400 block hover:bg-yellow-500 hover:text-gray-900" activeClassName="text-yellow-500" exact="true" to="/ingresar">
-                            Ingresa
-                        </NavLink>
-
-                        <text className="p-1 text-gray-400 block">
-                            <AuthDetails />
-                        </text>
                     </nav>
                 </div>
             )}

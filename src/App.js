@@ -5,12 +5,9 @@ import NuevaBebida from './components/paginas/NuevaBebida';
 import Ordenes from './components/paginas/Ordenes';
 import Inventario from './components/paginas/Inventario';
 import Sidebar from './components/ui/Sidebar';
-import Home from './components/paginas/Home';
 
 import firebase,{FirebaseContext} from './firebase';
-
-import AdminView from './components/paginas/AdminView';
-
+import Login from './components/paginas/Login';
 
 function App() {
 
@@ -38,11 +35,12 @@ function App() {
         <Sidebar isOpen={isSideBarOpen}/>
         <div className="md: w-3/5 xl:w-4/5 p-6">
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" />
             <Route path="/ordenes" element={<Ordenes />} />
             <Route path="/menu" element={<Menu />} />
             <Route path="/nueva-bebida" element={<NuevaBebida />} />
             <Route path="/inventario" element={<Inventario />} />
+            <Route path="/login" element={<Login />}/>
             
           </Routes>
         </div>
