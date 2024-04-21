@@ -1,7 +1,6 @@
 import { useReducer, createContext } from "react"; 
 
 export const Store = createContext();
-
 const initialState={
     cart : {
         cartItems:[],
@@ -46,13 +45,23 @@ case 'INCREMENT_QUANTITY': {
     });
     return { ...state, cart: { ...state.cart, cartItems } };
   }
+  case 'DECREMENT_QUANTITY': {
+    const { id } = action.payload;
+    const updatedCartItems = state.cart.cartItems.map(item => {
+      if (item.id === id && item.quantity > 1) {
+        return { ...item, quantity: item.quantity - 1 };
+      }
+      return item;
+    });
+    return { ...state, cart: { ...state.cart, cartItems: updatedCartItems } };
+  }
   
 default:
     return state;
 }
 }
 
-export function StoreProvieder({children}){
+export function StoreProvider({children}){
     const [state, dispatch] = useReducer(reducer, initialState)
     
     return <Store.Provider value={{state, dispatch}}>{children}</Store.Provider>

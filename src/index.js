@@ -5,15 +5,15 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 // import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { StoreProvieder } from './components/utils/Store';
+import { StoreProvider } from './components/utils/Store';
 
 
 ReactDOM.render(
   
   <Router>
-    <StoreProvieder>
+    <StoreProvider>
     <App />
-    </StoreProvieder>
+    </StoreProvider>
   </Router>
   , document.getElementById('root')
 );
