@@ -47,7 +47,7 @@ function App() {
         <Sidebar isOpen={isSideBarOpen}/>
         <div className="md: w-3/5 xl:w-4/5 p-6">
           <Routes>
-            <Route path="/homepage" element={<Home />} />
+            <Route path="/" element={<Home />} />
             <Route path="/ordenes" element={<Ordenes />} />
             <Route path="/menu" element={<Menu />} />
             <Route path="/nueva-bebida" element={<NuevaBebida />} />
