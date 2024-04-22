@@ -9,6 +9,7 @@ import Home from './components/paginas/Home';
 import Login from './components/paginas/Login';
 
 import firebase, { FirebaseContext } from './firebase';
+import Usuarios from './components/paginas/Usuarios';
 
 function App() {
   const appStyle = {
@@ -29,6 +30,7 @@ function App() {
             <Route path="/menu" element={<Menu />} />
             <Route path="/nueva-bebida" element={<NuevaBebida />} />
             <Route path="/inventario" element={<Inventario />} />
+            <Route path="/usuarios" element={<Usuarios/>}/>
             <Route path="/login" element={<Login/>}/>
           </Routes>
         </div>
