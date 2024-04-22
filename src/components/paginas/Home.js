@@ -24,8 +24,7 @@ function Home() {
         <div className="max-w-md mx-auto bg-white rounded-lg p-6 mb-8">
           <h2 className="text-3xl font-bold mb-4">Encuentra nuestra tienda más cercana</h2>
           <p className="text-lg mb-4">Visita una de nuestras sucursales para disfrutar de una amplia selección de té de burbujas. ¡Encuentra tu sabor favorito y descubre por qué el té de burbujas es tan popular en todo el mundo!</p>
-          <div className="text-xl mb-2">Dirección: [Dirección de la tienda]</div>
-          <div className="text-xl mb-2">Horario de atención: [Horario de la tienda]</div>
+          
         </div>
       </div>
     </div>

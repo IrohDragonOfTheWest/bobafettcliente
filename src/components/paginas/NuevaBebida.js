@@ -102,7 +102,7 @@ const NuevaBebida = () => {
                                 Nombre
                             </label>
                             <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                id="nombre" type="text" placeholder="Nombre del taller"
+                                id="nombre" type="text" placeholder="Nombre de la bebida"
                                 value={formik.values.nombre} onChange={formik.handleChange} onBlur={formik.handleBlur}
                             />
                         </div>

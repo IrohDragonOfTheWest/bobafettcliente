@@ -67,54 +67,56 @@ dispatch({type: 'CART_REMOVE_ITEM', payload: id })
 
   
 
-return(
-
-     
-    
-      <div className='card card-body mt-5'>
-        <h3 className='text-center'>Orden Compra</h3>
-        {cartItems.map((item) => (
-          <div key={item.id}>
-            <p>
-            <button
-  className="bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-  onClick={() => delToCart(item)}
->
-  x
-</button>
-
-              <strong>{item.nombre}</strong>
-            </p>
-            <p>
-              Cantidad:
-              <button
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2"
-                onClick={() => addToCart(item.id)}
-              >
-                +
-              </button>
-                {item.quantity}
+  return (
+    <div className='card card-body mt-5 border border-gray-300 rounded-lg shadow-md'>
+      <h3 className='text-center text-2xl font-bold mb-4'>Orden de Compra</h3>
+      {cartItems.map((item) => (
+        <div key={item.id} className="flex items-center justify-between mb-4">
+          <div className="flex items-center">
+            <img src={item.imagen} alt={item.nombre} className="w-32 h-32 mr-4 rounded-lg" />
+            <div>
+              <strong className="text-lg">{item.nombre}</strong>
+              <p>Cantidad: {item.quantity}</p>
+              <p>Precio unitario: ${item.precio}</p>
+              <div className="flex mt-2">
                 <button
-    className="bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-2"
-    onClick={() => removeFromCart(item.id)} // Aquí pasas el ID correctamente
-  >
-    -
-  </button>
-</p>
+                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded-full mr-2"
+                  onClick={() => addToCart(item.id)}
+                >
+                  +
+                </button>
+                <button
+                  className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded-full"
+                  onClick={() => removeFromCart(item.id)}
+                >
+                  -
+                </button>
+              </div>
+            </div>
           </div>
-        ))}
-    
-         Subtotal: ({cartItems.reduce((a, c)=> a + c.quantity, 0)}) : $
-         {cartItems.reduce((a,c)=>a + c.quantity * c.precio, 0)}
-         {cartItems.length ? <button  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={saveInfo}> Guardar venta </button > :  <button className="bg-green-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"> Guardar Venta</button>}
-
-
-
-
-
-         </div>
-
-
-
-);}
+          <button
+            className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded-full"
+            onClick={() => delToCart(item)}
+          >
+            X
+          </button>
+        </div>
+      ))}
+      <p className="mb-4">
+        Subtotal: ({cartItems.reduce((a, c)=> a + c.quantity, 0)}) : $
+        {cartItems.reduce((a,c)=>a + c.quantity * c.precio, 0)}
+      </p>
+      {cartItems.length ? 
+        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded shadow-md transition-colors duration-300" onClick={saveInfo}>
+Realizar Pedido        </button>
+        :
+        <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded shadow-md transition-colors duration-300">
+Realizar Pedido        </button>
+      }
+    </div>
+  );
+  
+  
+  
+}
 export default ConfirmarCarrito
