@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 import firebase from '../../firebase/firebase';
 import { getAuth, createUserWithEmailAndPassword, signOut, signInWithEmailAndPassword } from 'firebase/auth';
 import { getFirestore, doc, setDoc } from 'firebase/firestore';
@@ -7,9 +7,10 @@ const auth = firebase.auth;
 const firestore = getFirestore(firebase.firestore);
 
 function Login() {
+
     const [isRegistrando, setIsRegistrando] = useState(false);
 
-      async function registrarUsuario(email, password, rol) {
+    async function registrarUsuario(email, password, rol) {
         const infoUsuario = await createUserWithEmailAndPassword(
             auth,
             email,
@@ -50,7 +51,7 @@ function Login() {
                     {isRegistrando ? "Regístrate" : "Inicia sesión"}
                 </h1>
 
-                <form className="space-y-6">
+                <form className="space-y-6" onSubmit={submitHandler}>
                     <div>
                         <label htmlFor="email" className="block font-medium text-2xl">Correo electrónico:</label>
                         <input type="email" id="email" placeholder="Ingrese su correo" className="block w-full rounded-lg border-gray-300 mt-1 text-xl py-3 px-4" />
@@ -61,15 +62,13 @@ function Login() {
                         <input type="password" id="password" className="block w-full rounded-lg border-gray-300 mt-1 text-xl py-3 px-4" />
                     </div>
 
-                    {!isRegistrando && (
-                        <div>
-                            <label htmlFor="role" className="block font-medium text-2xl">Rol:</label>
-                            <select id="role" className="block w-full rounded-lg border-gray-300 mt-1 text-xl py-3 px-4">
-                                <option value="admin">Administrador</option>
-                                <option value="user">Usuario</option>
-                            </select>
-                        </div>
-                    )}
+                    <div>
+                        <label htmlFor="role" className="block font-medium text-2xl">Rol:</label>
+                        <select id="rol" className="block w-full rounded-lg border-gray-300 mt-1 text-xl py-3 px-4">
+                            <option value="admin">Administrador</option>
+                            <option value="user">Usuario</option>
+                        </select>
+                    </div>
 
                     <button type="submit" className="w-full bg-blue-500 text-white py-3 rounded-lg hover:bg-blue-600 transition duration-300 text-xl font-semibold">
                         {isRegistrando ? "Registrar" : "Iniciar sesión"}
@@ -80,13 +79,8 @@ function Login() {
                     {isRegistrando ? "Ya tengo una cuenta" : "Quiero registrarme"}
                 </button>
             </div>
-
-            <br />
-            <button onClick={() => signOut(auth)}>
-                cerrar sesión
-            </button>
         </div>
-    );
+    )
 }
 
-export default Login;
+export default Login
