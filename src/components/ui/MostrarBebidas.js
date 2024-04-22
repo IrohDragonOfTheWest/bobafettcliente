@@ -147,6 +147,7 @@ const MostrarBebida = ({ mostrarbebida }) => {
             <p className='text-gray.600 mb-4'>Descripcion {' '}
               <span className='text-gray-700 font-bold'>: {descripcion}</span>
             </p>
+
             {user && user.rol === "admin" && (
               <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded ml-4" onClick={toggleEdicion}>Actualizar Bebida </button>
             )}
