@@ -7,6 +7,7 @@ import firebase from "../../firebase/firebase";
 const auth = firebase.auth;
 
 const Sidebar = () => {
+    
 
     const barStyle = {
         backgroundColor: '#624100'
@@ -36,9 +37,17 @@ const Sidebar = () => {
                     <NavLink className="text-gray-400 hover:text-gray-900" activeClassName="text-yellow-500" exact={true} to="/login"> 
                         Login
                     </NavLink>
+                    
+                    
                 </nav>
             </div>
         </div>
+
+
+
+
+
+
     );
 }
 
