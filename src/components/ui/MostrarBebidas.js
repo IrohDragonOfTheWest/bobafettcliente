@@ -1,12 +1,20 @@
-import React, { useContext, useRef, useState} from 'react';
+import React, { useContext, useRef, useState, useEffect } from 'react';
 import { FirebaseContext } from '../../firebase/index';
 import Venta from './Sidebar';
 import { Store } from '../utils/Store';
 // import { getFirestore, collection, addDoc, updateDoc, doc } from 'firebase/firestore';
-import { getFirestore, collection, addDoc, updateDoc, doc, deleteDoc } from 'firebase/firestore';
+import { getFirestore, collection, addDoc, updateDoc, doc, deleteDoc, getDoc } from 'firebase/firestore';
+import firebase from "../../firebase/firebase";
+
+const auth = firebase.auth;
+const firestore = getFirestore(firebase.firestore);
 
 
 const MostrarBebida = ({ mostrarbebida }) => {
+
+
+
+
   const { state, dispatch } = useContext(Store);
   const { cart: { cartItems } } = state;
   const { firebase } = useContext(FirebaseContext);
@@ -71,6 +79,33 @@ const MostrarBebida = ({ mostrarbebida }) => {
       alert('Hubo un error al actualizar la bebida');
     }
   };
+
+  const [user, setUser] = useState(null);
+
+  useEffect((user) => {
+    const unsubscribe = auth.onAuthStateChanged(async (usuarioFirebase) => {
+      if (usuarioFirebase) {
+        const rol = await getRol(usuarioFirebase.uid);
+        const userData = {
+          uid: usuarioFirebase.uid,
+          email: usuarioFirebase.email,
+          rol: rol,
+        };
+        setUser(userData);
+      } else {
+        setUser(null);
+      }
+    });
+
+    return () => unsubscribe(); // Cleanup function
+  }, []);
+
+  async function getRol(uid) {
+    const docuRef = doc(firestore, `usuarios/${uid}`);
+    const docuCifrada = await getDoc(docuRef);
+    return docuCifrada.exists() ? docuCifrada.data().rol : null;
+  }
+
   return (
     <div className='w-full px-3 mb-4'>
       <div className="p-5 shadow-md" style={{ backgroundColor: "#F0CE71" }}>
@@ -79,16 +114,21 @@ const MostrarBebida = ({ mostrarbebida }) => {
             <img src={imagen} alt="imagen platillo" />
             <div className='sm:flex sm:mx-2'>
               <label className='block mt-5 sm:w-2/4'>
-                <span className='block text-gray-800 mb-2'>Existencias  </span>
-                <select
-                  className='bg-white shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-online'
-                  value={existencia}
-                  ref={existenciaRef}
-                  onChange={() => actualizarDisponibilidad()}
-                >
-                  <option value="true">Disponible</option>
-                  <option value="false">No Disponible</option>
-                </select>
+                {user && user.rol === "admin" && (
+                  <>
+                    <span className='block text-gray-800 mb-2'>Existencias  </span>
+                    <select
+                      className='bg-white shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-online'
+                      value={existencia}
+                      ref={existenciaRef}
+                      onChange={() => actualizarDisponibilidad()}
+                    >
+                      <option value="true">Disponible</option>
+                      <option value="false">No Disponible</option>
+                    </select>
+                  </>
+                )}
+
               </label>
             </div>
           </div>
@@ -103,29 +143,34 @@ const MostrarBebida = ({ mostrarbebida }) => {
             <p className='text-gray.600 mb-4'>Preparacion {' '}
               <span className='text-gray-700 font-bold'>: {preparacion}</span>
             </p>
-            <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded ml-4"  onClick={toggleEdicion}>Actualizar Bebida </button>
+            {user && user.rol === "admin" && (
+              <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded ml-4" onClick={toggleEdicion}>Actualizar Bebida </button>
+            )}
 
             {editando && (
-  <div className="p-5 shadow-md" style={{ backgroundColor: "#90FA92", borderRadius: '8px', maxWidth: '400px', margin: '0 auto' }}>
-    <h2 className="text-xl font-bold mb-3">Editar Bebida</h2>
-    <div className="flex flex-col mb-3">
-      <label className="mb-1">Nombre:</label>
-      <input type="text" ref={nuevoNombreRef} defaultValue={nombre} className="border rounded px-3 py-2 w-full" />
-    </div>
-    <div className="flex flex-col mb-3">
-      <label className="mb-1">Ingredientes:</label>
-      <textarea ref={nuevosIngredientesRef} defaultValue={ingredientes} className="border rounded px-3 py-2 w-full" />
-    </div>
-    <div className="flex flex-col mb-3">
-      <label className="mb-1">Preparación:</label>
-      <textarea ref={nuevaPreparacionRef} defaultValue={preparacion} className="border rounded px-3 py-2 w-full" />
-    </div>
-   
-    <button onClick={actualizarBebida} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Guardar Cambios</button>
-  </div>
-)}
+              <div className="p-5 shadow-md" style={{ backgroundColor: "#90FA92", borderRadius: '8px', maxWidth: '400px', margin: '0 auto' }}>
+                <h2 className="text-xl font-bold mb-3">Editar Bebida</h2>
+                <div className="flex flex-col mb-3">
+                  <label className="mb-1">Nombre:</label>
+                  <input type="text" ref={nuevoNombreRef} defaultValue={nombre} className="border rounded px-3 py-2 w-full" />
+                </div>
+                <div className="flex flex-col mb-3">
+                  <label className="mb-1">Ingredientes:</label>
+                  <textarea ref={nuevosIngredientesRef} defaultValue={ingredientes} className="border rounded px-3 py-2 w-full" />
+                </div>
+                <div className="flex flex-col mb-3">
+                  <label className="mb-1">Preparación:</label>
+                  <textarea ref={nuevaPreparacionRef} defaultValue={preparacion} className="border rounded px-3 py-2 w-full" />
+                </div>
+
+                <button onClick={actualizarBebida} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Guardar Cambios</button>
+              </div>
+            )}
             <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-3" onClick={() => addToCart(id)}>Agregar</button>
-            <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded ml-2" onClick={() => borrarBebida()}>Borrar</button>
+
+            {user && user.rol === "admin" && (
+              <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded ml-2" onClick={() => borrarBebida()}>Borrar</button>
+            )}
 
           </div>
         </div>
