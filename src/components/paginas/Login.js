@@ -23,7 +23,7 @@ function Login() {
         checkAdmin();
     }, []);
 
-    async function registrarUsuario(email, password, rol) {
+    async function registrarUsuario(nombre, email, password, rol) {
         const infoUsuario = await createUserWithEmailAndPassword(
             auth,
             email,
@@ -36,7 +36,7 @@ function Login() {
 
         const docuRef = doc(firestore, `usuarios/${infoUsuario.user.uid}`);
 
-        setDoc(docuRef, { correo: email, rol: rol });
+        setDoc(docuRef, { correo: email, rol: rol, nombre: nombre });
     }
 
     function submitHandler(e) {
@@ -46,11 +46,13 @@ function Login() {
         const password = e.target.elements.password.value;
         const rol = e.target.elements.rol.value;
 
-        console.log("submit", email, password, rol)
+        const nombre = isRegistrando ? e.target.elements.nombre.value : '';
+
+        console.log("submit", nombre, email, password, rol)
 
         if (isRegistrando) {
             //registrar
-            registrarUsuario(email, password, rol).then(() => {
+            registrarUsuario(nombre, email, password, rol).then(() => {
                 // Clear the form after registration
                 e.target.reset();
             });
@@ -73,6 +75,13 @@ function Login() {
                 </h1>
 
                 <form className="space-y-6" onSubmit={submitHandler}>
+                    {isRegistrando && (
+                        <div>
+                            <label htmlFor="nombre" className="block font-medium text-2xl">Nombre:</label>
+                            <input type="text" id="nombre" placeholder="Ingrese su nombre" className="block w-full rounded-lg border-gray-300 mt-1 text-xl py-3 px-4" />
+                        </div>
+                    )}
+
                     <div>
                         <label htmlFor="email" className="block font-medium text-2xl">Correo electrónico:</label>
                         <input type="email" id="email" placeholder="Ingrese su correo" className="block w-full rounded-lg border-gray-300 mt-1 text-xl py-3 px-4" />
