@@ -7,6 +7,7 @@ import Inventario from './components/paginas/Inventario';
 import Sidebar from './components/ui/Sidebar';
 import Home from './components/paginas/Home';
 import Login from './components/paginas/Login';
+import Footer from './components/ui/Footer';
 
 import Carrito from './components/paginas/Carrito'
 import ConfirmarCarrito from './components/paginas/ConfirmarCarrito'
@@ -50,6 +51,7 @@ function App() {
           </Routes>
         </div>
       </div>
+      <Footer/>
     </FirebaseContext.Provider>
 
   )
