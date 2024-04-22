@@ -33,7 +33,7 @@ const Sidebar = () => {
                     <NavLink className="text-gray-400 hover:text-gray-900" activeClassName="text-yellow-500" exact={true} to="/usuarios">
                         Usuarios
                     </NavLink>
-                    <NavLink className="text-gray-400 hover:text-gray-900" activeClassName="text-yellow-500" exact={true} to="/login">
+                    <NavLink className="text-gray-400 hover:text-gray-900" activeClassName="text-yellow-500" exact={true} to="/login"> 
                         Login
                     </NavLink>
                 </nav>

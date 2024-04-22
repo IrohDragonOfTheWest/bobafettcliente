@@ -37,6 +37,7 @@ function App() {
   
     <div style={appStyle}>
         <div className="w-full">
+        <Sidebar/>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/ordenes" element={<Ordenes />} />
