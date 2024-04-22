@@ -95,7 +95,7 @@ const delToCart = (id) => {
             </div>
           ))}
           <p>Subtotal: ({cartItems.reduce((a, c) => a + c.quantity, 0)}) : ${cartItems.reduce((a, c) => a + c.quantity * c.precio, 0)}</p>
-          {cartItems.length ?  <NavLink className="text-gray-400 hover:text-gray-900" activeClassName="text-yellow-500" exact={true} to="/login">  Login </NavLink>
+          {cartItems.length ?  <NavLink className="text-gray-400 hover:text-gray-900" activeClassName="text-yellow-500" exact={true} to="/confirmar">  Ver Carrito </NavLink>
                     : <button className="bg-green-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"> Ver carrito</button>}
         </div>
       <button className="fixed top-5 right-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={toggleCart}>Carrito</button>

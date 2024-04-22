@@ -9,7 +9,7 @@ import firebase from "../../firebase/firebase";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 import Login from "../paginas/Login";
-
+//13-42
 const auth = firebase.auth;
 const firestore = getFirestore(firebase.firestore);
 
