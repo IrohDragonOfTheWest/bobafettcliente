@@ -42,10 +42,9 @@ function App() {
     }}> 
   
     <div style={appStyle}>
-    <button onClick={toggleSidebar}>btnside</button>
-      <div className="md: flex min-h-screen">
+    <button onClick={toggleSidebar}>Hola</button>
         <Sidebar isOpen={isSideBarOpen}/>
-        <div className="md: w-3/5 xl:w-4/5 p-6">
+        <div className="w-full">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/ordenes" element={<Ordenes />} />
@@ -57,7 +56,6 @@ function App() {
           </Routes>
         </div>
       </div>
-    </div>
     </FirebaseContext.Provider>
 
   )
