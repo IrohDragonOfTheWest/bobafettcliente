@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react';
 import firebase from '../../firebase/firebase';
-import { getAuth, createUserWithEmailAndPassword, signOut, signInWithEmailAndPassword } from 'firebase/auth';
-import { getFirestore, doc, setDoc } from 'firebase/firestore';
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import { getFirestore, doc, setDoc, getDocs, collection, query, where } from 'firebase/firestore';
 
 const auth = firebase.auth;
 const firestore = getFirestore(firebase.firestore);
@@ -9,6 +9,19 @@ const firestore = getFirestore(firebase.firestore);
 function Login() {
 
     const [isRegistrando, setIsRegistrando] = useState(false);
+    const [isAdminRegistered, setIsAdminRegistered] = useState(false);
+
+    // Check if admin is already registered
+    useEffect(() => {
+        const checkAdmin = async () => {
+            const usersRef = collection(firestore, 'usuarios');
+            const q = query(usersRef, where("rol", "==", "admin"));
+            const querySnapshot = await getDocs(q);
+            setIsAdminRegistered(!querySnapshot.empty);
+        };
+
+        checkAdmin();
+    }, []);
 
     async function registrarUsuario(email, password, rol) {
         const infoUsuario = await createUserWithEmailAndPassword(
@@ -37,13 +50,21 @@ function Login() {
 
         if (isRegistrando) {
             //registrar
-            registrarUsuario(email, password, rol);
+            registrarUsuario(email, password, rol).then(() => {
+                // Clear the form after registration
+                e.target.reset();
+            });
         } else {
             //login
-            signInWithEmailAndPassword(auth, email, password)
+            signInWithEmailAndPassword(auth, email, password).then(() => {
+                // Clear the form after login
+                e.target.reset();
 
+            });
         }
     }
+
+
     return (
         <div className="bg-white min-200 flex justify-center items-center">
             <div className="bg-gray-100 p-8 rounded-lg shadow-md space-y-6">
@@ -62,13 +83,25 @@ function Login() {
                         <input type="password" id="password" className="block w-full rounded-lg border-gray-300 mt-1 text-xl py-3 px-4" />
                     </div>
 
-                    <div>
-                        <label htmlFor="role" className="block font-medium text-2xl">Rol:</label>
-                        <select id="rol" className="block w-full rounded-lg border-gray-300 mt-1 text-xl py-3 px-4">
-                            <option value="admin">Administrador</option>
-                            <option value="user">Usuario</option>
-                        </select>
-                    </div>
+
+                    {isAdminRegistered && (
+                        <div style={{ display: isAdminRegistered ? 'none' : 'block' }} >
+                            <label htmlFor="role" className="block font-medium text-2xl">Rol:</label>
+                            <select id="rol" className="block w-full rounded-lg border-gray-300 mt-1 text-xl py-3 px-4" disabled>
+                                <option value="user">Usuario</option>
+                            </select>
+                        </div>
+                    )}
+
+                    {!isAdminRegistered && (
+                        <div >
+                            <label htmlFor="role" className="block font-medium text-2xl">Rol:</label>
+                            <select id="rol" className="block w-full rounded-lg border-gray-300 mt-1 text-xl py-3 px-4">
+                                <option value="admin">Administrador</option>
+                                <option value="user">Usuario</option>
+                            </select>
+                        </div>
+                    )}
 
                     <button type="submit" className="w-full bg-blue-500 text-white py-3 rounded-lg hover:bg-blue-600 transition duration-300 text-xl font-semibold">
                         {isRegistrando ? "Registrar" : "Iniciar sesión"}
@@ -83,4 +116,4 @@ function Login() {
     )
 }
 
-export default Login
+export default Login;
