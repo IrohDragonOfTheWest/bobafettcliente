@@ -137,12 +137,17 @@ const MostrarBebida = ({ mostrarbebida }) => {
             <p className='text-gray-600 mb-4'>Precio: {' '}
               <span className='text-gray-700 font-bold'>$ {precio}</span>
             </p>
-            <p className='text-gray.600 mb-4'>Ingredientes {' '}
-              <span className='text-gray-700 font-bold'>: {ingredientes}</span>
-            </p>
-            <p className='text-gray.600 mb-4'>Preparacion {' '}
-              <span className='text-gray-700 font-bold'>: {preparacion}</span>
-            </p>
+            {user && user.rol === "admin" && (
+              <>
+                <p className='text-gray.600 mb-4'>Ingredientes {' '}
+                  <span className='text-gray-700 font-bold'>: {ingredientes}</span>
+                </p>
+                <p className='text-gray.600 mb-4'>Preparacion {' '}
+                  <span className='text-gray-700 font-bold'>: {preparacion}</span>
+                </p>
+              </>
+            )}
+
             {user && user.rol === "admin" && (
               <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded ml-4" onClick={toggleEdicion}>Actualizar Bebida </button>
             )}
