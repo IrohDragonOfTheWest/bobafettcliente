@@ -69,11 +69,7 @@ const Sidebar = () => {
                         Menu
                     </NavLink>
 
-                    {user && user.rol === "admin" && (
-                        <NavLink className="text-gray-400 hover:text-gray-900" activeclassname="text-yellow-500" exact="true" to="/inventario">
-                            Inventario
-                        </NavLink>
-                    )}
+                    
 
                     {user && user.rol === "admin" && (
                         <NavLink className="text-gray-400 hover:text-gray-900" activeclassname="text-yellow-500" exact="true" to="/usuarios">
