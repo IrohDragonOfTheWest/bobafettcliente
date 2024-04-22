@@ -31,24 +31,22 @@ function App() {
 
   return (
     <FirebaseContext.Provider
-      value={{
-        firebase
-      }}>
+    value={{
+      firebase
+    }}> 
+  
+    <div style={appStyle}>
+        <div className="w-full">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/ordenes" element={<Ordenes />} />
+            <Route path="/menu" element={<Menu />} />
+            <Route path="/nueva-bebida" element={<NuevaBebida />} />
+            <Route path="/inventario" element={<Inventario />} />
+            <Route path="/login" element={<Login/>}/>
+            {/* {!user && <Route path="/login" element={<Login/>}/>} */}
+          </Routes>
 
-      <div style={appStyle}>
-        <div className="md: flex min-h-screen">
-          <Sidebar />
-          <div className="md: w-3/5 xl:w-4/5 p-6">
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/ordenes" element={<Ordenes />} />
-              <Route path="/menu" element={<Menu />} />
-              <Route path="/nueva-bebida" element={<NuevaBebida />} />
-              <Route path="/inventario" element={<Inventario />} />
-              <Route path="/login" element={<Login />} />
-              {/* {!user && <Route path="/login" element={<Login/>}/>} */}
-            </Routes>
-          </div>
         </div>
       </div>
     </FirebaseContext.Provider>
