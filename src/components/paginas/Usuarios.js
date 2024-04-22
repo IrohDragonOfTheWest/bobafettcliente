@@ -48,7 +48,7 @@ function Usuarios() {
       <ul>
         {users.map(user => (
           <li key={user.id}>
-            Correo: {user.correo}, Rol: {user.rol}
+            Nombre: {user.nombre} Correo: {user.correo}, Rol: {user.rol}
             <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded ml-2" onClick={() => handleDeleteUser(user.id)}>Eliminar</button>
           </li>
         ))}
