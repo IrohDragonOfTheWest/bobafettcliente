@@ -95,7 +95,8 @@ const NuevaBebida = () => {
     }
     return (
         <>
-            <h1 className="text-3xl font-light mb-4">Agregar Bebida</h1>
+<h1 className="text-3xl font-light mb-4 text-center">Agregar Bebida</h1>
+
             <div className="flex justify-center mt-4">
                 <div className="w-full max-w-3xl">
 
@@ -245,7 +246,7 @@ const NuevaBebida = () => {
                         <input
                             type="submit"
                             className='bg-gray-800 hover:bg-gray-900 w-full mt-5 p-2 text-white uppercase'
-                            value="Agregar Taller"
+                            value="Agregar Boba"
                         />
 
                     </form>
