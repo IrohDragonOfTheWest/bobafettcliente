@@ -1,9 +1,12 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import '../../css/styles.css';
+import { signOut } from "firebase/auth";
+import firebase from "../../firebase/firebase";
 
+const auth = firebase.auth;
 
-const Navbar = () => {
+const Sidebar = () => {
 
     const barStyle = {
         backgroundColor: '#624100'
@@ -33,13 +36,10 @@ const Navbar = () => {
                     <NavLink className="text-gray-400 hover:text-gray-900" activeClassName="text-yellow-500" exact={true} to="/login">
                         Login
                     </NavLink>
-                    <NavLink className="text-gray-400 hover:text-gray-900" activeClassName="text-yellow-500" exact={true} to="/registro-cliente">
-                        Registro
-                    </NavLink>
                 </nav>
             </div>
         </div>
     );
 }
 
-export default Navbar;
+export default Sidebar;

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Routes, Route } from 'react-router';
 import Menu from './components/paginas/Menu';
 import NuevaBebida from './components/paginas/NuevaBebida';
@@ -8,42 +8,34 @@ import Sidebar from './components/ui/Sidebar';
 import Home from './components/paginas/Home';
 import Login from './components/paginas/Login';
 
-import firebase,{FirebaseContext} from './firebase';
-//import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { FirebaseContext } from './firebase';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import firebase from './firebase/firebase';
 
-//const auth = getAuth(firebase);
-
+const auth = firebase.auth;
 function App() {
 
-  const [isSideBarOpen, setIsSideBarOpen] = useState(false);
+  const [user, setUser] = useState(null);
 
-  //const [user, setUser] = useState(null);
-  
-  // onAuthStateChanged(auth, (usuarioFirebase) => {
-  //   if (usuarioFirebase){
-  //     setUser(usuarioFirebase);
-  //   } else {
-  //     setUser(null);
-  //   }
-  // });
-
-  const toggleSidebar = () => {
-    setIsSideBarOpen(!isSideBarOpen);
-  };
+  onAuthStateChanged(auth, (usuarioFirebase) => {
+    if (usuarioFirebase) {
+      setUser(usuarioFirebase);
+    } else {
+      setUser(null);
+    }
+  });
 
   const appStyle = {
     backgroundColor: '#DFE0DF'
   };
 
-  return ( 
+  return (
     <FirebaseContext.Provider
     value={{
       firebase
     }}> 
   
     <div style={appStyle}>
-    <button onClick={toggleSidebar}>Hola</button>
-        <Sidebar isOpen={isSideBarOpen}/>
         <div className="w-full">
           <Routes>
             <Route path="/" element={<Home />} />
@@ -54,6 +46,7 @@ function App() {
             <Route path="/login" element={<Login/>}/>
             {/* {!user && <Route path="/login" element={<Login/>}/>} */}
           </Routes>
+
         </div>
       </div>
     </FirebaseContext.Provider>

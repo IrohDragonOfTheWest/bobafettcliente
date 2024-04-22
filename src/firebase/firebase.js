@@ -1,24 +1,22 @@
-import app from 'firebase/compat/app';
+// firebase.js
+import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore'
 import 'firebase/compat/storage'
 import 'firebase/compat/auth'
 
 import firebaseConfig from './config'
 
-
-//crea el objeto 
 class Firebase {
-    //es un metodo que hara match
     constructor() {
-        if (!app.apps.length) {
-            app.initializeApp(firebaseConfig)
+        if (!firebase.apps.length) {
+            firebase.initializeApp(firebaseConfig)
         }
-        this.db = app.firestore();
-        this.storage = app.storage();
-        this.auth = app.auth();
+        this.db = firebase.firestore();
+        this.storage = firebase.storage();
+        this.auth = firebase.auth();
     }
 }
 
-const firebase = new Firebase();
+const firebaseApp = new Firebase();
 
-export default firebase;
+export default firebaseApp;
