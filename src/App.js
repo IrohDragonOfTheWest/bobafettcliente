@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React from 'react'
 import { Routes, Route } from 'react-router';
 import Menu from './components/paginas/Menu';
 import NuevaBebida from './components/paginas/NuevaBebida';
@@ -15,19 +15,9 @@ import { FirebaseContext } from './firebase';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import firebase from './firebase/firebase';
 
-const auth = firebase.auth;
+import Usuarios from './components/paginas/Usuarios';
+
 function App() {
-
-  const [user, setUser] = useState(null);
-
-  onAuthStateChanged(auth, (usuarioFirebase) => {
-    if (usuarioFirebase) {
-      setUser(usuarioFirebase);
-    } else {
-      setUser(null);
-    }
-  });
-
   const appStyle = {
     backgroundColor: '#DFE0DF'
   };
@@ -36,8 +26,7 @@ function App() {
     <FirebaseContext.Provider
     value={{
       firebase
-    }}> 
-  
+    }}>
     <div style={appStyle}>
     <div className="w-full">
 
@@ -52,15 +41,13 @@ function App() {
             <Route path="/menu" element={<Menu />} />
             <Route path="/nueva-bebida" element={<NuevaBebida />} />
             <Route path="/inventario" element={<Inventario />} />
+            <Route path="/usuarios" element={<Usuarios/>}/>
             <Route path="/login" element={<Login/>}/>
 
             <Route path="/carrito" element={<Carrito/>}/>
             <Route path="/confirmar" element={<ConfirmarCarrito/>}/>
 
-          
-            {/* {!user && <Route path="/login" element={<Login/>}/>} */}
           </Routes>
-
         </div>
       </div>
     </FirebaseContext.Provider>
