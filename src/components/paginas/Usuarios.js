@@ -42,19 +42,35 @@ function Usuarios() {
     }
 };
 
-  return (
-    <div>
-      <h1>Lista de Usuarios</h1>
-      <ul>
-        {users.map(user => (
-          <li key={user.id}>
-            Nombre: {user.nombre} Correo: {user.correo}, Rol: {user.rol}
-            <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded ml-2" onClick={() => handleDeleteUser(user.id)}>Eliminar</button>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
+return (
+  <div className="bg-gray-100 p-4 rounded-lg shadow-md">
+    <h1 className="text-2xl font-bold mb-4">Lista de Usuarios</h1>
+    <ul>
+      {users.map(user => (
+        <li key={user.id} className="flex items-center justify-between mb-2 bg-white rounded-lg p-4 shadow-sm">
+          <div>
+            <p className="text-lg">
+              <span className="font-bold">Nombre:</span> {user.nombre}
+            </p>
+            <p className="text-sm">
+              <span className="font-bold">Correo:</span> {user.correo}
+            </p>
+            <p className="text-sm">
+              <span className="font-bold">Rol:</span> {user.rol}
+            </p>
+          </div>
+          <button 
+            className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded ml-2 focus:outline-none"
+            onClick={() => handleDeleteUser(user.id)}
+          >
+            Eliminar
+          </button>
+        </li>
+      ))}
+    </ul>
+  </div>
+);
+
 }
 
 export default Usuarios;

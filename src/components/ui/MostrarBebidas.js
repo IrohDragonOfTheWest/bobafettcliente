@@ -19,7 +19,7 @@ const MostrarBebida = ({ mostrarbebida }) => {
   const { cart: { cartItems } } = state;
   const { firebase } = useContext(FirebaseContext);
   const existenciaRef = useRef(mostrarbebida.existencia);
-  const { id, nombre, imagen, precio, ingredientes, preparacion, existencia } = mostrarbebida;
+  const { id, nombre, imagen, precio, ingredientes, preparacion,descripcion,existencia } = mostrarbebida;
 
   const addToCart = (id) => {
     const existItemIndex = state.cart.cartItems.findIndex(x => x.id === id);
@@ -51,7 +51,7 @@ const MostrarBebida = ({ mostrarbebida }) => {
   const nuevoNombreRef = useRef(null);
   const nuevosIngredientesRef = useRef(null);
   const nuevaPreparacionRef = useRef(null);
-  const nuevaExistenciaRef = useRef(null);
+  const nuevaDescripcionRef = useRef(null);
 
   const [editando, setEditando] = useState(false);
 
@@ -63,7 +63,8 @@ const MostrarBebida = ({ mostrarbebida }) => {
     const nuevoNombre = nuevoNombreRef.current.value;
     const nuevosIngredientes = nuevosIngredientesRef.current.value;
     const nuevaPreparacion = nuevaPreparacionRef.current.value;
-    const nuevaExistencia = nuevaExistenciaRef.current.checked;
+    const nuevaDescripcion = nuevaDescripcionRef.current.value;
+    
 
     try {
       const bebidaRef = doc(firebase.db, 'bebidas', id);
@@ -71,7 +72,7 @@ const MostrarBebida = ({ mostrarbebida }) => {
         nombre: nuevoNombre,
         ingredientes: nuevosIngredientes,
         preparacion: nuevaPreparacion,
-        existencia: nuevaExistencia
+        descripcion: nuevaDescripcion,
       });
       alert('Bebida actualizada exitosamente');
     } catch (error) {
@@ -143,6 +144,9 @@ const MostrarBebida = ({ mostrarbebida }) => {
             <p className='text-gray.600 mb-4'>Preparacion {' '}
               <span className='text-gray-700 font-bold'>: {preparacion}</span>
             </p>
+            <p className='text-gray.600 mb-4'>Descripcion {' '}
+              <span className='text-gray-700 font-bold'>: {descripcion}</span>
+            </p>
             {user && user.rol === "admin" && (
               <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded ml-4" onClick={toggleEdicion}>Actualizar Bebida </button>
             )}
@@ -162,6 +166,11 @@ const MostrarBebida = ({ mostrarbebida }) => {
                   <label className="mb-1">Preparación:</label>
                   <textarea ref={nuevaPreparacionRef} defaultValue={preparacion} className="border rounded px-3 py-2 w-full" />
                 </div>
+                <div className="flex flex-col mb-3">
+                  <label className="mb-1">Descripcion:</label>
+                  <textarea ref={nuevaDescripcionRef} defaultValue={descripcion} className="border rounded px-3 py-2 w-full" />
+                </div>
+                
 
                 <button onClick={actualizarBebida} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Guardar Cambios</button>
               </div>

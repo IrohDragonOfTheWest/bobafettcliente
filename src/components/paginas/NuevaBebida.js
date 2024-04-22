@@ -27,6 +27,7 @@ const NuevaBebida = () => {
             precio: '',
             ingredientes: '',
             preparacion: '',
+            descripcion:'',
             imagen: '',
 
 
@@ -47,8 +48,12 @@ const NuevaBebida = () => {
           
             preparacion: Yup.string()
                 .min(10, 'La preparacion debe tener al menos 10 caracteres')
+                .required('La preparacion es obligatorio'),
+                descripcion: Yup.string()
+                .min(10, 'La Descripcion debe tener al menos 10 caracteres')
                 .required('La preparacion es obligatorio')
         }),
+        
 
         onSubmit: mostrarbebida => {
             try {
@@ -184,6 +189,27 @@ const NuevaBebida = () => {
                             </div>
                         ) : null}
                         
+                         {/* Descripcion */}
+                         <div className="mb-4">
+                            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="descripcion">
+                            Descripcion
+                            </label>
+                            <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                id="descripcion" type="text" placeholder="descripcion de la bebida"
+                                value={formik.values.descripcion} onChange={formik.handleChange} onBlur={formik.handleBlur}
+                            />
+                        </div>
+
+                        {formik.touched.descripcion && formik.errors.descripcion ? (
+                            <div className="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-5" role="alert">
+                                <p className="font-bold">
+                                    Hubo un error!
+                                </p>
+                                <p>
+                                    {formik.errors.descripcion}
+                                </p>
+                            </div>
+                        ) : null}
                         {/* Imagen */}
                         <div className="mb-4">
                             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="imagen">
