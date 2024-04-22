@@ -24,13 +24,16 @@ function reducer(state, action){
                 }
               }
               
-case 'CART_REMOVE_ITEM' :{
-    const cartItems = state.cart.cartItems.filter(
-        (item => item.id !== action.payload.id)
-    )
-    return {...state, cart:{...state.cart,cartItems} }
-}
-
+              case 'CART_REMOVE_ITEM': {
+                const itemIdToRemove = action.payload.id;
+                console.log('ID del elemento a eliminar:', itemIdToRemove);
+            
+                const cartItems = state.cart.cartItems.filter(item => item.id !== itemIdToRemove);
+                console.log('Nuevo arreglo de elementos del carrito:', cartItems);
+            
+                return { ...state, cart: { ...state.cart, cartItems } };
+            }
+            
 case 'REMOVE_CART':{
     const cartItems = []
     return {...state, cart:{...state.cart,cartItems} }

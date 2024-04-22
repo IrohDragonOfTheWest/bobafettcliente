@@ -14,6 +14,7 @@ const auth = firebase.auth;
 const firestore = getFirestore(firebase.firestore);
 
 const Sidebar = () => {
+    
 
     const [user, setUser] = useState(null);
 
@@ -83,9 +84,17 @@ const Sidebar = () => {
                     <NavLink className="text-gray-400 hover:text-gray-900" activeclassname="text-yellow-500" exact="true" to="/login">
                         {user != null ? <button onClick={() => signOut(auth)}>Cerrar sesión</button> : "Iniciar sesión"}
                     </NavLink>
+                    
+                    
                 </nav>
             </div>
         </div>
+
+
+
+
+
+
     );
 }
 

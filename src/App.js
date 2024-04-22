@@ -8,7 +8,13 @@ import Sidebar from './components/ui/Sidebar';
 import Home from './components/paginas/Home';
 import Login from './components/paginas/Login';
 
-import firebase, { FirebaseContext } from './firebase';
+import Carrito from './components/paginas/Carrito'
+import ConfirmarCarrito from './components/paginas/ConfirmarCarrito'
+
+import { FirebaseContext } from './firebase';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import firebase from './firebase/firebase';
+
 import Usuarios from './components/paginas/Usuarios';
 
 function App() {
@@ -22,9 +28,14 @@ function App() {
       firebase
     }}>
     <div style={appStyle}>
-        <div className="w-full">
+    <div className="w-full">
+
         <Sidebar/>
+        <Carrito/>
+
           <Routes>
+          
+
             <Route path="/" element={<Home />} />
             <Route path="/ordenes" element={<Ordenes />} />
             <Route path="/menu" element={<Menu />} />
@@ -32,6 +43,10 @@ function App() {
             <Route path="/inventario" element={<Inventario />} />
             <Route path="/usuarios" element={<Usuarios/>}/>
             <Route path="/login" element={<Login/>}/>
+
+            <Route path="/carrito" element={<Carrito/>}/>
+            <Route path="/confirmar" element={<ConfirmarCarrito/>}/>
+
           </Routes>
         </div>
       </div>
